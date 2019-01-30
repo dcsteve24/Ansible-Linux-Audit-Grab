@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  remote_user: <your user> 
+  remote_user: your_user
   become: true
   roles:
     -  auditing
