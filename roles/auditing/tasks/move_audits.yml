@@ -1,0 +1,49 @@
+---
+#This task scps the audit files into the mounted share
+#Since the move command will error and stop further actions, I do not have a check in place before deleting. If it don't complete the entire move without errors, it wont delete.
+#Last log doesnt seem to copy well so added an exemption to it.
+#I had fail2ban installed, so had to add specific exemptions for it as well.
+
+- name: Move_Audits | Load Vars
+  include_vars: "main.yml"
+
+- name: Move_Audits | Set the audits_list variable
+  find:
+    paths: /var/log/
+    recurse: yes
+  register: audits_list
+
+- name: Move_Audits | Set delete_me variable
+  set_fact:
+    delete_me: "{{ delete_me + [ item.path ] }}"
+  no_log: true
+  with_items: "{{ audits_list.files }}"
+  when: item.path is search('[0-9]') and item.path != "/var/log/fail2ban.log"
+
+- name: Move_Audits | Set erase_me variable
+  set_fact:
+    erase_me: "{{ erase_me + [ item.path ] }}"
+  no_log: true
+  with_items: "{{ audits_list.files }}"
+  when: item.path is not search('[0-9]') or item.path == "/var/log/fail2ban.log"
+
+- name: Move_Audits | Copy the files off of target(s) and into the mounted shared drive
+  fetch:
+    src: "{{ item.path }}"
+    dest: "/mnt/audits/{{ ansible_date_time.date }}"
+  no_log: true
+  with_items: "{{ audits_list.files }}"
+  when: item.path != "/var/log/lastlog"
+
+- name: Move_Audits | Erase currently used log files
+  shell: "cat /dev/null > {{ item }}"
+  no_log: true
+  with_items: "{{ erase_me }}"
+  notify: restart syslog
+
+- name: Move_Audits | Deletes the rotated logs
+  file:
+    state: absent
+    path: "{{ item }}"
+  no_log: true
+  with_items: "{{ delete_me }}"

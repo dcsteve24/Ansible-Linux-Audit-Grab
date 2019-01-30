@@ -1,0 +1,22 @@
+---
+#This tasks mounts the share on sol to store the audits into
+
+- name: mount_share |  Load Secrets
+  include_vars: "secrets.yml"
+  when: inventory_hostname in groups.local
+
+- name: mount_share | Make the directory to mount on
+  file:
+    path: /mnt/audits
+    state: directory
+  when: inventory_hostname in groups.local
+
+- name: mount_share | Mount the shared drive
+  mount:
+    state: mounted
+    path: /mnt/audits
+# ---->    src: //IP/share_name
+    fstype: cifs
+# ---->    opts: "username=username,domain=domain.local,password={{auditor_password}},vers=3.0"
+  when: inventory_hostname in groups.local
+  notify: unmount share

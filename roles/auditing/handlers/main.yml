@@ -1,0 +1,14 @@
+---
+# handlers file for move-audits
+- name: restart syslog
+  service:
+    name: rsyslog
+    state: restarted
+
+- name: unmount share
+  mount:
+    state: absent
+    path: /mnt/audits
+# --->   src: //IP/share_name
+    fstype: cifs
+

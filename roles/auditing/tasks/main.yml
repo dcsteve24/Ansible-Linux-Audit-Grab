@@ -1,0 +1,4 @@
+---
+# tasks file for move-audits
+- include: mount_share.yml
+- include: move_audits.yml
