@@ -10,5 +10,6 @@ Upon download, user must edit the files based on their enviornment. I have marke
 3. ./roles/auditing/vars/secrets.yml, enter your password to mount the share with. Encrypt the file with ansible-vault encrypt path_to_file.
     Remove the #--->
 4. ./hosts, add the targets and list the host you are running from under the local group.
+5. ./playbooks/Move_Audit.yml, enter your ansible user you SSH/sudo with.
 
 I typically run this play with ansible-playbooks -kK --ask-vault-pass path_to_playbook.yml
