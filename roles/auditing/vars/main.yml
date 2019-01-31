@@ -3,3 +3,6 @@
 erase_me: []
 delete_me: []
 audits_list: []
+share_drive: //IP_or_hostname/share
+share_username: username that can access share
+share_domain: your.domain.here
