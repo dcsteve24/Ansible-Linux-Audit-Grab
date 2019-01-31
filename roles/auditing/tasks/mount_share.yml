@@ -5,6 +5,10 @@
   include_vars: "secrets.yml"
   when: inventory_hostname in groups.local
 
+- name: mount_share | Load Vars
+  include_vars: "main.yml"
+  when: inventory_hostname in groups.local
+
 - name: mount_share | Make the directory to mount on
   file:
     path: /mnt/audits
@@ -15,8 +19,8 @@
   mount:
     state: mounted
     path: /mnt/audits
-# ---->    src: //IP/share_name
+    src: {{ share_drive }}
     fstype: cifs
-# ---->    opts: "username=username,domain=domain.local,password={{auditor_password}},vers=3.0"
+    opts: {{ mount_options }}
   when: inventory_hostname in groups.local
   notify: unmount share
