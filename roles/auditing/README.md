@@ -14,11 +14,14 @@ cifs-utils
 Role Variables
 --------------
 
-/var/secrets: auditor_password 		#Holds the auditor account password
-/var/main.yml: delete_me 		#Empty array later used to hold files to be deleted
-/var/main.yml: erase_me			#Empty array later used to hold files to be erased
-/var/main.yml: audits_list		#Empty array later used to hold audits that will be copied
- 
+- /var/secrets: auditor_password 		#Holds the auditor account password
+- /var/main.yml: delete_me 		#Empty array later used to hold files to be deleted
+- /var/main.yml: erase_me			#Empty array later used to hold files to be erased
+- /var/main.yml: audits_list		#Empty array later used to hold audits that will be copied
+- /var/main.yml: share_drive #contains path to shared drive
+- /var/main.yml: share_domain #contains domain name
+- /var/main.yml: share_username #contains a username of the user capable of mounting the share
+
 various self contained variables inside the play through register command
 
 
