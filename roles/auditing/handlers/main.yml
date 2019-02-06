@@ -9,6 +9,6 @@
   mount:
     state: absent
     path: /mnt/audits
-# --->   src: //IP/share_name
+    src: //IP/share_name
     fstype: cifs
 
