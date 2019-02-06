@@ -16,7 +16,7 @@ Role Variables
 
 | Variable  | Location | Required | Default | Description
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| auditor_password  |  | Yes  | N/A | used to hold your domain |
+| auditor_password  | ./roles/auditing/vars/secrets.yml | Yes  | N/A | Account that can |
 | krb5_default_realm  | ./roles/sssd_auth/vars/main.yml | Yes  | N/A | where the kerberos authentication occurs (typically same as realm_domain). Must be in all CAPS. |
 | realm_ad_ou | ./roles/sssd_auth/vars/main.yml |Yes | N/A | the OU or CN (in LDAP form) to place the PC when joined to the domain |
 | sudo_group | ./roles/sssd_auth/vars/main.yml |Yes | N/A | Adds the specified group to allow the ability to sudo|
