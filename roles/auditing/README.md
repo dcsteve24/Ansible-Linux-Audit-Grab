@@ -2,9 +2,9 @@ Auditing
 =========
 
 Mounts the shared drive and then goes to targets and fetches their audits, erasing or deleting the audits afterwards (depending on if rotated log or not).
-My configs are for a windows shared drive on the domain, edit as needed to fit your enviornment
+My configs are for a windows shared drive on the domain, edit as needed to fit your enviornment (i.e. removing the share_domain variable and entry in tasks)
 
-Logs are saved to the mounted share in the following format: //<share>//<YYYY-MM-DD>/<inventory_hostname>/var/log/
+Logs are saved to the mounted share in the following format: //share_name/YYYY-MM-DD/inventory_hostname/var/log/
 
 Requirements
 ------------
@@ -16,20 +16,13 @@ Role Variables
 
 | Variable  | Location | Required | Default | Description
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| auditor_password  | ./roles/auditing/vars/secrets.yml | Yes  | N/A | Account that can |
-| krb5_default_realm  | ./roles/sssd_auth/vars/main.yml | Yes  | N/A | where the kerberos authentication occurs (typically same as realm_domain). Must be in all CAPS. |
-| realm_ad_ou | ./roles/sssd_auth/vars/main.yml |Yes | N/A | the OU or CN (in LDAP form) to place the PC when joined to the domain |
-| sudo_group | ./roles/sssd_auth/vars/main.yml |Yes | N/A | Adds the specified group to allow the ability to sudo|
-| kerberos_user | ./roles/sssd_auth/vars/secrets.yml | Yes | N/A | The user that can add computers to the domain |
-| kerberos_user_password | ./roles/sssd_auth/vars/secrets.yml | Yes | N/A | The password of the user that can add computers to the domain |
-
-- /var/secrets: auditor_password 		#Holds the auditor account password
-- /var/main.yml: delete_me 		#Empty array later used to hold files to be deleted
-- /var/main.yml: erase_me			#Empty array later used to hold files to be erased
-- /var/main.yml: audits_list		#Empty array later used to hold audits that will be copied
-- /var/main.yml: share_drive #contains path to shared drive
-- /var/main.yml: share_domain #contains domain name
-- /var/main.yml: share_username #contains a username of the user capable of mounting the share
+| user_password | ./roles/auditing/vars/secrets.yml | Yes  | N/A | password for user that can mount the share |
+| delete_me | ./roles/auditing/vars/main.yml | No | [] | empty array later used to hold files to be deleted |
+| erase_me | ./roles/auditing/vars/main.yml | No | [] | empty array later used to hold files to be erased |
+| audits_list | ./roles/auditing/vars/main.yml | No | [] | empty array later used to hold audits that will be copied |
+| share_drive | ./roles/auditing/vars/main.yml | Yes | N/A | contains the path to the shared drive |
+| share_domain | ./roles/auditing/vars/main.yml | Yes | N/A | the domain name of where the share resides |
+| share_username | ./roles/auditing/vars/main.yml | Yes | N/A | username of the user capable of mounting the share
 
 various self contained variables inside the play through register command
 
