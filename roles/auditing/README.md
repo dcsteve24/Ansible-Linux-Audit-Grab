@@ -1,4 +1,4 @@
-Role Name
+Auditing
 =========
 
 Mounts the shared drive and then goes to targets and fetches their audits, erasing or deleting the audits afterwards (depending on if rotated log or not).
@@ -13,6 +13,15 @@ cifs-utils
 
 Role Variables
 --------------
+
+| Variable  | Location | Required | Default | Description
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| auditor_password  |  | Yes  | N/A | used to hold your domain |
+| krb5_default_realm  | ./roles/sssd_auth/vars/main.yml | Yes  | N/A | where the kerberos authentication occurs (typically same as realm_domain). Must be in all CAPS. |
+| realm_ad_ou | ./roles/sssd_auth/vars/main.yml |Yes | N/A | the OU or CN (in LDAP form) to place the PC when joined to the domain |
+| sudo_group | ./roles/sssd_auth/vars/main.yml |Yes | N/A | Adds the specified group to allow the ability to sudo|
+| kerberos_user | ./roles/sssd_auth/vars/secrets.yml | Yes | N/A | The user that can add computers to the domain |
+| kerberos_user_password | ./roles/sssd_auth/vars/secrets.yml | Yes | N/A | The password of the user that can add computers to the domain |
 
 - /var/secrets: auditor_password 		#Holds the auditor account password
 - /var/main.yml: delete_me 		#Empty array later used to hold files to be deleted
