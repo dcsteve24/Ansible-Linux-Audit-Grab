@@ -21,6 +21,6 @@
     path: /mnt/audits
     src: {{ share_drive }}
     fstype: cifs
-    opts: "username={{ share_username }},domain={{ share_domain }},password={{ auditor_password }},vers=3.0"
+    opts: "username={{ share_username }},domain={{ share_domain }},password={{ user_password }},vers=3.0"
   when: inventory_hostname in groups.local
   notify: unmount share
