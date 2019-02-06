@@ -31,6 +31,7 @@ Example Playbook
 ----------------
 
     - hosts: all
+      become: true
       roles:
          - auditing
 
