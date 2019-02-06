@@ -12,3 +12,6 @@ Upon download, user must edit the files based on their enviornment. I have marke
 5. ./playbooks/Move_Audit.yml, enter your ansible user you SSH/sudo with. Remove the #--->
 
 I typically run this play with ansible-playbooks -kK --ask-vault-pass path_to_playbook.yml
+
+# Note
+This includes exemptions for fail2ban, to prevent the accidental deletion of its main log.
