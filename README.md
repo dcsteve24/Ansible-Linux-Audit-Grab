@@ -29,9 +29,9 @@ Role Variables
 | Variable  | Location | Required | Default | Description
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | user_password | ./roles/auditing/vars/secrets.yml | Yes  | N/A | password for user that can mount the share |
-| delete_me | ./roles/auditing/vars/main.yml | No | [ ] | empty array later used to hold files to be deleted |
-| erase_me | ./roles/auditing/vars/main.yml | No | [ ] | empty array later used to hold files to be erased |
-| audits_list | ./roles/auditing/vars/main.yml | No | [ ] | empty array later used to hold audits that will be copied |
+| delete_me | ./roles/auditing/defaults/main.yml | No | [ ] | empty array later used to hold files to be deleted |
+| erase_me | ./roles/auditing/defaults/main.yml | No | [ ] | empty array later used to hold files to be erased |
+| audits_list | ./roles/auditing/defaults/main.yml | No | [ ] | empty array later used to hold audits that will be copied |
 | share_drive | ./roles/auditing/vars/main.yml | Yes | N/A | contains the path to the shared drive |
 | share_domain | ./roles/auditing/vars/main.yml | Yes | N/A | the domain name of where the share resides |
 | share_username | ./roles/auditing/vars/main.yml | Yes | N/A | username of the user capable of mounting the share
