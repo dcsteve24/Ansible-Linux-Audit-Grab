@@ -1,5 +1,5 @@
 ---
 # vars file for move-audits
-share_drive:
-share_username:
-share_domain:
+mount_point: 
+log_root_path: 
+shared_drive: 
