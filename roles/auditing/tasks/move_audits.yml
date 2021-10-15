@@ -1,5 +1,5 @@
 ---
-#This task scps the audit files off of the hypervisors onto sol, so sol can then copy them to the share in a different play
+#This task scps the audit files off of the hypervisors onto the running ansible server so the server can then copy them to the share in a different play
 #Since the move command will error and stop further actions, I do not have a check in place before deleting. If it don't complete the entire move, it wont delete.
 
 #First copy off everything
